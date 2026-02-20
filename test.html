@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SalemX Example</title>
+<style>
+    body { font-family: monospace; background: #f0f0f0; padding: 20px; }
+    pre { background: #fff; padding: 10px; border: 1px solid #ccc; overflow-x: auto; }
+    h1, h2 { font-family: sans-serif; }
+    .output { background: #e8ffe8; border: 1px solid #88cc88; padding: 5px; margin: 5px 0; }
+</style>
+</head>
+<body>
+
+<h1>SalemX Example File</h1>
+
+<h2>Code</h2>
+<pre>
+&lt;include&gt;html&lt;/include&gt;
+&lt;include&gt;js&lt;/include&gt;
+&lt;include&gt;bash&lt;/include&gt;
+&lt;include&gt;python&lt;/include&gt;
+&lt;include&gt;swift&lt;/include&gt;
+&lt;include&gt;cpp&lt;/include&gt;
+&lt;include&gt;xml&lt;/include&gt;
+&lt;include&gt;SalemC&lt;/include&gt;
+
+&lt;string&gt;
+    &lt;pet&gt;cat&lt;/pet&gt;
+&lt;/string&gt;
+
+&lt;output&gt;pet&lt;/output&gt;
+
+&lt;html&gt;
+    &lt;p&gt;My First Paragraph&lt;/p&gt;
+&lt;/html&gt;
+
+&lt;js&gt;
+console.log("Ping example");
+&lt;/js&gt;
+
+&lt;bash&gt;
+echo "Bash placeholder"
+&lt;/bash&gt;
+
+&lt;python&gt;
+print("My pet is cat")
+&lt;/python&gt;
+
+&lt;swift&gt;
+print("My pet is: cat")
+&lt;/swift&gt;
+
+&lt;cpp&gt;
+std::cout &lt;&lt; "My pet is: cat" &lt;&lt; std::endl;
+&lt;/cpp&gt;
+
+&lt;xml&gt;
+&lt;example&gt;
+    &lt;variable ref="pet"&gt;cat&lt;/variable&gt;
+&lt;/example&gt;
+&lt;/xml&gt;
+
+&lt;var&gt;
+    &lt;pet&gt;cat&lt;/pet&gt;
+    &lt;food&gt;fish&lt;/food&gt;
+&lt;/var&gt;
+
+&lt;html&gt;
+    &lt;h1&gt;Welcome to SalemC inside SalemX!&lt;/h1&gt;
+    &lt;p&gt;My pet is &lt;var-ref&gt;pet&lt;/var-ref&gt; and loves &lt;var-ref&gt;food&lt;/var-ref&gt;.&lt;/p&gt;
+&lt;/html&gt;
+</pre>
+
+<h2>Example Outputs</h2>
+<div class="output">pet → cat</div>
+<div class="output">food → fish</div>
+<div class="output">HTML Paragraph → My First Paragraph</div>
+
+<h2>Optional JS Console</h2>
+<script>
+console.log("Pet: cat, Food: fish");
+</script>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SalemX Full Format Demo</title>
+<style>
+  body { font-family: monospace; background: #f9f9f9; padding: 20px; }
+  pre { background: #fff; padding: 10px; border: 1px solid #ccc; overflow-x: auto; }
+  h1, h2 { font-family: sans-serif; }
+  .output { background: #e8ffe8; border: 1px solid #88cc88; padding: 5px; margin: 5px 0; }
+  .block { margin-bottom: 20px; }
+</style>
+</head>
+<body>
+
+<h1>SalemX Full Format Support</h1>
+
+<!-- HTML Block -->
+<div class="block">
+<h2>&lt;html&gt; Block</h2>
+<pre>
+&lt;html&gt;
+  &lt;h2&gt;HTML Example&lt;/h2&gt;
+  &lt;p&gt;This is a paragraph.&lt;/p&gt;
+&lt;/html&gt;
+</pre>
+<h3>Rendered:</h3>
+<h2>HTML Example</h2>
+<p>This is a paragraph.</p>
+</div>
+
+<!-- JS Block -->
+<div class="block">
+<h2>&lt;js&gt; Block</h2>
+<pre>
+&lt;js&gt;
+console.log("Hello from JS");
+&lt;/js&gt;
+</pre>
+<div class="output">Check browser console for JS output</div>
+<script>
+console.log("Hello from JS");
+</script>
+</div>
+
+<!-- Bash Block -->
+<div class="block">
+<h2>&lt;bash&gt; Block</h2>
+<pre>
+&lt;bash&gt;
+echo "Hello from Bash"
+&lt;/bash&gt;
+</pre>
+<div class="output">Hello from Bash (simulated)</div>
+</div>
+
+<!-- Python Block -->
+<div class="block">
+<h2>&lt;python&gt; Block</h2>
+<pre>
+&lt;python&gt;
+print("Hello from Python")
+&lt;/python&gt;
+</pre>
+<div class="output">Hello from Python (simulated)</div>
+</div>
+
+<!-- Swift Block -->
+<div class="block">
+<h2>&lt;swift&gt; Block</h2>
+<pre>
+&lt;swift&gt;
+print("Hello from Swift")
+&lt;/swift&gt;
+</pre>
+<div class="output">Hello from Swift (simulated)</div>
+</div>
+
+<!-- C++ Block -->
+<div class="block">
+<h2>&lt;cpp&gt; Block</h2>
+<pre>
+&lt;cpp&gt;
+std::cout &lt;&lt; "Hello from C++" &lt;&lt; std::endl;
+&lt;/cpp&gt;
+</pre>
+<div class="output">Hello from C++ (simulated)</div>
+</div>
+
+<!-- XML Block -->
+<div class="block">
+<h2>&lt;xml&gt; Block</h2>
+<pre>
+&lt;xml&gt;
+&lt;example&gt;
+  &lt;message&gt;Hello from XML&lt;/message&gt;
+&lt;/example&gt;
+&lt;/xml&gt;
+</pre>
+<div class="output">&lt;example&gt;&lt;message&gt;Hello from XML&lt;/message&gt;&lt;/example&gt;</div>
+</div>
+
+</body>
+</html>
