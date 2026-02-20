@@ -1,0 +1,345 @@
+<include>html</include> # format that will be added
+<include>js</include> # Add JavaScript
+<include>bash</include> # add bash
+<include>python</include>
+<include>swift</include>
+<include>cpp</include>  # Add C++ support
+<include>xml</include>
+<include>SalemC</include>   <!-- Enable SalemC support in SalemX -->
+
+<string> # string
+    <pet>cat</pet> # internal string pet=cat
+</string>
+
+<output>pet</output> # Outputs string pet=cat
+
+<html> # HTML code body
+    <p>My First Paragraph</p>
+</html>
+
+<js> # Javascript
+    const url = "https://www.google.com";
+const duration = 5000; // 5 seconds
+const intervalTime = 1000; // 1 second
+
+let elapsed = 0;
+
+const interval = setInterval(() => {
+  fetch(url, { method: 'GET', mode: 'no-cors' })
+    .then(() => console.log("Pinged Google"))
+    .catch(err => console.log("Error pinging Google:", err));
+
+  elapsed += intervalTime;
+  if (elapsed >= duration) {
+    clearInterval(interval);
+    console.log("Stopped pinging after 5 seconds");
+  }
+}, intervalTime);
+</js>
+
+<bash> # Linux Bash 
+    sudo ping google.com
+</bash>
+<python> # Python
+# Define a variable
+pet = "cat"
+
+# Print the variable
+print("My pet is:", pet)
+</python>
+
+<swift>
+import Foundation
+
+// Define a variable
+let pet = "cat"
+
+// Print the variable
+print("My pet is: \(pet)")
+</swift>
+
+<output>swift</output>  # Outputs the result of the Swift block
+
+<cpp>
+#include <iostream>
+#include <string>
+
+int main() {
+    std::string pet = "cat";
+    std::cout << "My pet is: " << pet << std::endl;
+    return 0;
+}
+</cpp>
+
+<output>cpp</output>  # Outputs the result of the C++ block
+
+<instructions>
+    <description>Guide for SalemX file format</description>
+
+    <step number="1">
+        <title>Include Languages</title>
+        <explanation>Use &lt;include&gt;language&lt;/include&gt; to declare which languages are in this file.</explanation>
+        <note>Example: &lt;include&gt;html&lt;/include&gt;, &lt;include&gt;js&lt;/include&gt;, &lt;include&gt;bash&lt;/include&gt;</note>
+    </step>
+
+    <step number="2">
+        <title>Internal Variables</title>
+        <explanation>Use &lt;string&gt; ... &lt;/string&gt; to define key-value pairs.</explanation>
+        <note>Each variable should be wrapped in its own tag, e.g., &lt;pet&gt;cat&lt;/pet&gt;</note>
+    </step>
+
+    <step number="3">
+        <title>Output Variables</title>
+        <explanation>Use &lt;output&gt;variable_name&lt;/output&gt; to display a variable’s value.</explanation>
+    </step>
+
+    <step number="4">
+        <title>Code Blocks</title>
+        <explanation>Each supported language has its own block tag:</explanation>
+        <languages>
+            <language>html</language>
+            <language>js</language>
+            <language>bash</language>
+            <language>python</language>
+            <language>swift</language>
+            <language>cpp</language>
+            <language>xml</language>
+        </languages>
+    </step>
+
+    <step number="5">
+        <title>Execution Order</title>
+        <explanation>
+            The interpreter should execute in the following order:
+            <order>
+                <item>Include statements</item>
+                <item>Internal variables</item>
+                <item>Output commands</item>
+                <item>Code blocks in the order they appear</item>
+            </order>
+        </explanation>
+    </step>
+
+    <step number="6">
+        <title>Cross-Block Variables</title>
+        <explanation>Variables defined in &lt;string&gt; can optionally be accessed by any code block.</explanation>
+    </step>
+
+    <step number="7">
+        <title>Safe Defaults</title>
+        <explanation>For Bash and other commands, include limits (like ping -c) to prevent infinite loops.</explanation>
+    </step>
+
+    <step number="8">
+        <title>XML Blocks</title>
+        <explanation>Use &lt;xml&gt; ... &lt;/xml&gt; for XML code. This can include nested elements and attributes.</explanation>
+    </step>
+</instructions>
+<include>xml</include>  # Enable XML support in SalemX
+
+<string>
+    <xml_support>enabled</xml_support>  # Internal variable to mark XML feature
+</string>
+
+<output>xml_support</output>  # Outputs "enabled" to confirm XML is active
+
+<instructions>
+    <description>Instructions for the interpreter to handle XML blocks.</description>
+
+    <tag name="xml">
+        <purpose>Wrap XML code inside &lt;xml&gt; ... &lt;/xml&gt; tags.</purpose>
+        <syntax>&lt;xml&gt; ... &lt;/xml&gt;</syntax>
+        <behavior>
+            <item>Allow nested XML elements and attributes.</item>
+            <item>Do not execute as a programming language; treat as structured data.</item>
+            <item>Optionally, variables from &lt;string&gt; can be inserted via tags.</item>
+        </behavior>
+    </tag>
+
+    <execution_order>
+        <item>Process &lt;include&gt; statements first</item>
+        <item>Parse internal variables from &lt;string&gt;</item>
+        <item>Execute/interpret XML blocks as structured data</item>
+        <item>Handle &lt;output&gt; statements as usual</item>
+    </execution_order>
+
+</instructions>
+
+<xml>
+<example>
+    <note>This is a placeholder XML block to show structure.</note>
+    <variable ref="pet">cat</variable> <!-- can reference SalemX variable -->
+</example>
+</xml>
+<include>SalemC</include>   <!-- Enable SalemC support in SalemX -->
+
+<!-- Define variables in SalemC style -->
+<var>
+    <pet>cat</pet>
+    <food>fish</food>
+</var>
+
+<!-- Output variables -->
+<output>pet</output>   <!-- Shows: cat -->
+<output>food</output>  <!-- Shows: fish -->
+
+<!-- HTML block using variables -->
+<html>
+    <h1>Welcome to SalemC inside SalemX!</h1>
+    <p>My pet is <var-ref>pet</var-ref> and loves <var-ref>food</var-ref>.</p>
+</html>
+
+<!-- Optional JS block -->
+<js>
+console.log("Pet:", "cat", "Food:", "fish");
+</js>
+
+<!-- Optional Bash placeholder (human-readable) -->
+<bash>
+echo "Pet is cat and loves fish"
+</bash>
+
+<!-- XML-style instructions for SalemC -->
+<xml>
+<instructions>
+    <description>How SalemC works inside SalemX</description>
+
+    <tag name="SalemC">
+        <purpose>HTML-based easy language integrated into SalemX.</purpose>
+        <syntax>&lt;include&gt;SalemC&lt;/include&gt;</syntax>
+        <features>
+            <feature>Define variables with &lt;var&gt; ... &lt;/var&gt;</feature>
+            <feature>Reference variables with &lt;var-ref&gt; ... &lt;/var-ref&gt;</feature>
+            <feature>Output variables with &lt;output&gt; ... &lt;/output&gt;</feature>
+            <feature>Write HTML directly inside &lt;html&gt; ... &lt;/html&gt;</feature>
+            <feature>Optional JS &lt;js&gt; for dynamic behavior</feature>
+        </features>
+    </tag>
+</instructions>
+</xml>
+
+<string>
+    <salemx>Self-Describing Language</salemx>
+    <html>Hypertext Markup Language</html>
+    <js>JavaScript scripting</js>
+    <bash>Linux Bash commands</bash>
+    <python>Python scripting</python>
+    <swift>Swift scripting</swift>
+    <cpp>C++ programming</cpp>
+    <xml>Structured XML data</xml>
+    <SalemC>Easy HTML-based SalemC mini-language</SalemC>
+</string>
+
+<instructions>
+    <description>SalemX Interpreter Specification for All Main Blocks</description>
+
+    <block name="salemx">
+        <purpose>Core language itself</purpose>
+        <behavior>
+            <step>Handles <string> and <output> for internal variables</step>
+            <step>Must not confuse content with XML or other block formats</step>
+        </behavior>
+    </block>
+
+    <block name="string">
+        <purpose>Define internal variables</purpose>
+        <behavior>
+            <step>Each child tag is a variable name</step>
+            <step>Tag content is variable value</step>
+            <step>Variables accessible in <output> and <var-ref></step>
+        </behavior>
+    </block>
+
+    <block name="output">
+        <purpose>Display variable values</purpose>
+        <behavior>
+            <step>Look up variable from <string> or <var> blocks</step>
+            <step>Print exact value</step>
+            <step>Do not interpret as XML or other code</step>
+        </behavior>
+    </block>
+
+    <block name="html">
+        <purpose>Render HTML content</purpose>
+        <behavior>
+            <step>Allow standard HTML tags</step>
+            <step>Allow <var-ref> to reference variables</step>
+        </behavior>
+    </block>
+
+    <block name="js">
+        <purpose>Execute JavaScript code</purpose>
+        <behavior>
+            <step>Run JS natively if interpreter supports it</step>
+            <step>Variables from <string> can optionally be injected</step>
+        </behavior>
+    </block>
+
+    <block name="bash">
+        <purpose>Execute Bash commands</purpose>
+        <behavior>
+            <step>Run Bash commands safely</step>
+            <step>Use safe defaults to prevent infinite loops (e.g., ping -c)</step>
+        </behavior>
+    </block>
+
+    <block name="python">
+        <purpose>Execute Python code</purpose>
+        <behavior>
+            <step>Run Python code blocks</step>
+            <step>Optional access to <string> variables</step>
+        </behavior>
+    </block>
+
+    <block name="swift">
+        <purpose>Execute Swift code</purpose>
+        <behavior>
+            <step>Run Swift code blocks</step>
+            <step>Optional access to <string> variables</step>
+        </behavior>
+    </block>
+
+    <block name="cpp">
+        <purpose>Execute C++ code</purpose>
+        <behavior>
+            <step>Compile/run C++ code blocks</step>
+            <step>Optional access to <string> variables</step>
+        </behavior>
+    </block>
+
+    <block name="xml">
+        <purpose>Structured XML data</purpose>
+        <behavior>
+            <step>Allow nested XML elements and attributes</step>
+            <step>Do not execute as code; treat as structured data</step>
+            <step>Variables can optionally be injected</step>
+        </behavior>
+    </block>
+
+    <block name="SalemC">
+        <purpose>Easy HTML-based mini-language inside SalemX</purpose>
+        <behavior>
+            <step>Define variables with <var></step>
+            <step>Reference variables with <var-ref></step>
+            <step>Output variables with <output></step>
+            <step>Write HTML content inside <html></step>
+            <step>Optional JS or Bash blocks</step>
+        </behavior>
+    </block>
+
+    <execution_order>
+        <step>Parse <string> and <var> internal variables first</step>
+        <step>Execute <output> statements</step>
+        <step>Execute code blocks (<html>, <js>, <bash>, <python>, <swift>, <cpp>, <xml>, <SalemC>) in the order they appear</step>
+    </execution_order>
+</instructions>
+
+<output>salemx</output>  # Outputs "Self-Describing Language"
+<output>html</output>     # Outputs "Hypertext Markup Language"
+<output>js</output>       # Outputs "JavaScript scripting"
+<output>bash</output>     # Outputs "Linux Bash commands"
+<output>python</output>   # Outputs "Python scripting"
+<output>swift</output>    # Outputs "Swift scripting"
+<output>cpp</output>      # Outputs "C++ programming"
+<output>xml</output>      # Outputs "Structured XML data"
+<output>SalemC</output>   # Outputs "Easy HTML-based SalemC mini-language"
