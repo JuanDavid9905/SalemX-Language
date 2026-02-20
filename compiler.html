@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>SalemX Compiler</title>
+<style>
+body { font-family: monospace; padding: 20px; }
+textarea { width: 100%; height: 300px; }
+button { margin: 10px 0; padding: 10px; }
+#output { border: 1px solid #ccc; padding: 15px; margin-top: 20px; }
+.code-block { background: #f4f4f4; padding: 10px; margin: 10px 0; white-space: pre-wrap; }
+</style>
+</head>
+<body>
+
+<h1>SalemX Compiler</h1>
+
+<textarea id="input"></textarea>
+<br>
+<button onclick="compileSalemX()">Compile</button>
+
+<div id="output"></div>
+
+<script>
+function compileSalemX() {
+    const input = document.getElementById("input").value;
+    const outputDiv = document.getElementById("output");
+    outputDiv.innerHTML = "";
+
+    let variables = {};
+
+    // Parse <string> blocks
+    const stringMatches = input.match(/<string>([\s\S]*?)<\/string>/g);
+    if (stringMatches) {
+        stringMatches.forEach(block => {
+            const varMatches = block.match(/<(\w+)>(.*?)<\/\1>/g);
+            if (varMatches) {
+                varMatches.forEach(v => {
+                    const name = v.match(/<(\w+)>/)[1];
+                    const value = v.match(/>(.*?)<\/\w+>/)[1].trim();
+                    variables[name] = value;
+                });
+            }
+        });
+    }
+
+    // Parse <var> blocks (SalemC style)
+    const varBlocks = input.match(/<var>([\s\S]*?)<\/var>/g);
+    if (varBlocks) {
+        varBlocks.forEach(block => {
+            const varMatches = block.match(/<(\w+)>(.*?)<\/\1>/g);
+            if (varMatches) {
+                varMatches.forEach(v => {
+                    const name = v.match(/<(\w+)>/)[1];
+                    const value = v.match(/>(.*?)<\/\w+>/)[1].trim();
+                    variables[name] = value;
+                });
+            }
+        });
+    }
+
+    // Process <output>
+    const outputMatches = input.match(/<output>(.*?)<\/output>/g);
+    if (outputMatches) {
+        outputMatches.forEach(o => {
+            const key = o.match(/<output>(.*?)<\/output>/)[1].trim();
+            if (variables[key]) {
+                outputDiv.innerHTML += "<div>" + variables[key] + "</div>";
+            }
+        });
+    }
+
+    // Process <html> blocks
+    const htmlMatches = input.match(/<html>([\s\S]*?)<\/html>/g);
+    if (htmlMatches) {
+        htmlMatches.forEach(block => {
+            let content = block.match(/<html>([\s\S]*?)<\/html>/)[1];
+
+            // Replace <var-ref>
+            content = content.replace(/<var-ref>(.*?)<\/var-ref>/g, (match, p1) => {
+                return variables[p1] || "";
+            });
+
+            outputDiv.innerHTML += content;
+        });
+    }
+
+    // Show other language blocks as code preview
+    const languages = ["js", "bash", "python", "swift", "cpp", "xml"];
+    languages.forEach(lang => {
+        const matches = input.match(new RegExp(`<${lang}>([\\s\\S]*?)<\/${lang}>`, "g"));
+        if (matches) {
+            matches.forEach(block => {
+                const code = block.match(new RegExp(`<${lang}>([\\s\\S]*?)<\/${lang}>`))[1];
+                outputDiv.innerHTML += `<div class="code-block"><b>${lang.toUpperCase()} Block:</b>\n${code}</div>`;
+            });
+        }
+    });
+}
+</script>
+
+</body>
+</html>
